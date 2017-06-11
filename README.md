@@ -1,3 +1,3 @@
-Teste_Automação_FrontEnd
+Teste de Automação FrontEnd
 
-
+Utilizando Cucumber e Capybara
