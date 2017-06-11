@@ -1,4 +1,3 @@
-# TesteWalmartCucumber
-Teste Walmart Cucumber
+Teste de Automação Backend 
 
-teste de validação do Cucumber 
+Utilizando Cucumber e HTTParty 
