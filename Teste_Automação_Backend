@@ -3,39 +3,25 @@
 
 require 'httparty'
 
+response = nil
+
 Cenario: Automação Backend
 
-Dado(/^Utilizando a API com um cep válido$/) do 
+Dado(/^A utilização da API com um cep válido$/) do |cep, tipoDeLogradouro, logradouro, bairro, cidade, estado|
     begin 
     response = HTTParty.get('http://correiosapi.apphb.com/cep/$CEP',
-    :body => { :CEP => $CEP.to_s,
-               :CEP => $CEP.to_s,
-               :CEP => $CEP.to_s,
-               :CEP => $CEP.to_s,
-               :CEP => $CEP.to_s,
-               :CEP => $CEP.to_s,
+    :body => { :cep => cep.to_s,
+               :tipoDeLogradouro => tipoDeLogradouro.to_s,
+               :logradouro => logradouro.to_s,
+               :bairro => bairro.to_s,
+               :cidade => cidade.to_s,
+               :estado => estado.to_s,
              }to_json
-    
+    :headers => {'Content-type' => 'application/json'})          
+end    
 end
 
-
-Quando(/^Os usuarios fazem login com sucesso$/) do
-     fill in ('Username', :with => "tomsmith")
-     fill_in ('Password', :with => "SuperSecretPassword!")
+Então(/^O retorno da API é nulo ou inválido$/) do 
+     expect(response).to have_content 'O CEP informado é inválido ou não existe'
 end
 
-E(/^Clicar no botão de Login$/) do 
-     click_button 'Login'
-end
-
-Então(/^Validar a mensagem de Login$/) do 
-     expect(page).to have_content 'You logged into a secure area'
-end
-
-E(/^Clicar no botão de Logout$/) do 
-     click_button 'Logout'
-end
-
-E(/^Validar a mensagem de Logout$/) do 
-     expect(page).to have_content 'You logged out of the secure area'
-end
