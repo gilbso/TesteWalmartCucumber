@@ -1,11 +1,23 @@
 # enconding: utf-8
 #!/usr/bin/env ruby
 
+require 'httparty'
+
 Cenario: Automação Backend
 
-Dado(/^Os usuarios fazem acesso a página$/) do 
-    visit 'https://the-internet.herokuapp.com/login'
+Dado(/^Utilizando a API com um cep válido$/) do 
+    begin 
+    response = HTTParty.get('http://correiosapi.apphb.com/cep/$CEP',
+    :body => { :CEP => $CEP.to_s,
+               :CEP => $CEP.to_s,
+               :CEP => $CEP.to_s,
+               :CEP => $CEP.to_s,
+               :CEP => $CEP.to_s,
+               :CEP => $CEP.to_s,
+             }to_json
+    
 end
+
 
 Quando(/^Os usuarios fazem login com sucesso$/) do
      fill in ('Username', :with => "tomsmith")
