@@ -21,7 +21,9 @@ Dado(/^A utilização da API com um cep válido$/) do |cep, tipoDeLogradouro, lo
 end    
 end
 
-Então(/^O retorno da API é nulo ou inválido$/) do 
-     expect(response).to have_content 'O CEP informado é inválido ou não existe'
+Então(/^O retorno da API é nulo ou inválido$/) do
+     rescue Exception => e
+     expect(body.response).to have_content 'O CEP informado é inválido ou não existe'
+     exit
 end
 
