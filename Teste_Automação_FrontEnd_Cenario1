@@ -8,6 +8,7 @@ feature "Login" do
   
   Cenario: "Automação FrontEnd" do 
    visit login_path
+  end
 
   Dado(/^Os usuarios fazem acesso a página$/) do 
     visit 'https://the-internet.herokuapp.com/login'
