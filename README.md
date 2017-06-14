@@ -2,6 +2,6 @@ Teste de Automação Backend
 
 Utilizando Cucumber e HTTParty 
 
-Para utilizar o httparty é necessário o arquivo abaixo
+Para o httparty utilizei o arquivo abaixo na aplicação
 
 gem install httparty
