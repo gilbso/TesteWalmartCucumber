@@ -1,15 +1,26 @@
 # enconding: utf-8
 #!/usr/bin/env ruby
 
-Cenario: Automação FrontEnd
+require gems install
+
+feature "Login" do
+  let(:user) { build(:user) }
+  
+Cenario: "Automação FrontEnd" do 
+   visit login_path
 
 Dado(/^Os usuarios fazem acesso a página$/) do 
     visit 'https://the-internet.herokuapp.com/login'
 end
 
-Quando(/^Os usuarios fazem login com sucesso$/) do
-     fill in ('Username', :with => "tomsmith")
-     fill_in ('Password', :with => "SuperSecretPassword!")
+Quando(/^Os usuarios já registrados fazem login$/) do
+     fill in ('user_Username', :with => "user_Username.tomsmith")
+     fill_in ('user_Password', :with => "user_Password.SuperSecretPassword!")
+end
+
+Quando(/^Os usuarios não registrados fazem login$/) do
+     fill in ('user_Username', :with => "user.Username")
+     fill_in ('user_Password', :with => "user.user_Password")
 end
 
 E(/^Clicar no botão de Login$/) do 
