@@ -1,1 +1,46 @@
-ffdfsdf
+# enconding: utf-8
+#!/usr/bin/env ruby
+
+require gems install
+
+feature "Login" do
+  let(:user) { build(:user) }
+  
+  Cenario: "Automação FrontEnd" do 
+   visit login_path
+   reset mailer
+  end
+
+  Dado(/^Os usuarios fazem acesso a página$/) do 
+    visit 'https://the-internet.herokuapp.com/login'
+  end
+
+  Quando(/^Os usuarios não registrados fazem login$/) do
+     fill_in ('user_email', :with => "user.email")
+     fill in ('user_Username', :with => "user.Username")
+     fill_in ('user_Password', :with => "user.user_Password")
+     fill_in ('user_password_confirmation', :with => user.user_Password")
+  end
+
+  E(/^Clicar no botão de Login$/) do 
+     click_button 'Login'
+  end
+
+  Então(/^Validar a mensagem de Login$/) do 
+     expect(page).to have_text("Uma mensagem com um link de confirmação foi enviado para o seu endereço de email.
+                               Por favor abra o link para ativar sua conta")
+     expect(unread_emails_for(user.email).count).to eq(1)    
+     
+     open_email(user.email)
+     expect(current_email).to have_body_text("É possível confirmar sua conta de email através do link apresentado")
+     click_first_link_in_email
+     expect(page).to have_content('Sign in')  
+           
+     fill in ('user_Username', :with => "user.Username")
+     fill_in ('user_Password', :with => "user.user_Password")
+     click_button 'Login'
+     expect(page).to have_content 'You logged into a secure área'
+     click_button 'Logout'
+     expect(page).to have_content 'You logged out of the secure área'
+  end
+end
