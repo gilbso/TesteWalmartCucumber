@@ -6,35 +6,36 @@ require gems install
 feature "Login" do
   let(:user) { build(:user) }
   
-Cenario: "Automação FrontEnd" do 
+  Cenario: "Automação FrontEnd" do 
    visit login_path
 
-Dado(/^Os usuarios fazem acesso a página$/) do 
+  Dado(/^Os usuarios fazem acesso a página$/) do 
     visit 'https://the-internet.herokuapp.com/login'
-end
+  end
 
-Quando(/^Os usuarios já registrados fazem login$/) do
+  Quando(/^Os usuarios já registrados fazem login$/) do
      fill in ('user_Username', :with => "user_Username.tomsmith")
      fill_in ('user_Password', :with => "user_Password.SuperSecretPassword!")
-end
+  end
 
-Quando(/^Os usuarios não registrados fazem login$/) do
+  Quando(/^Os usuarios não registrados fazem login$/) do
      fill in ('user_Username', :with => "user.Username")
      fill_in ('user_Password', :with => "user.user_Password")
-end
+  end
 
-E(/^Clicar no botão de Login$/) do 
+  E(/^Clicar no botão de Login$/) do 
      click_button 'Login'
-end
+  end
 
-Então(/^Validar a mensagem de Login$/) do 
+  Então(/^Validar a mensagem de Login$/) do 
      expect(page).to have_content 'You logged into a secure area'
-end
+  end
 
-E(/^Clicar no botão de Logout$/) do 
+  E(/^Clicar no botão de Logout$/) do 
      click_button 'Logout'
-end
+  end
 
-E(/^Validar a mensagem de Logout$/) do 
+  E(/^Validar a mensagem de Logout$/) do 
      expect(page).to have_content 'You logged out of the secure area'
+  end
 end
